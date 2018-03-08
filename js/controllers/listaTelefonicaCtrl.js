@@ -1,8 +1,9 @@
-angular.module("listaTelefonica").controller('listaTelefonicaCtrl', function ($scope, $filter, uppercaseFilter, contatosAPI, operadorasAPI) {
+angular.module("listaTelefonica").controller('listaTelefonicaCtrl', function ($scope, $filter, uppercaseFilter, contatosAPI, operadorasAPI, serialGenerator) {
     $scope.app = "Lista Telefonica";
     $scope.contatos = contatosAPI.getContatos();
         $scope.operadoras = operadorasAPI.getOperadoras();
     $scope.adicionarContato = function (contato) {
+        contato.serial = serialGenerator.generate();
         $scope.contatos.push(contatosAPI.saveContato(contato));
         delete $scope.contato;
         // Seta os campos do form para intocados.
