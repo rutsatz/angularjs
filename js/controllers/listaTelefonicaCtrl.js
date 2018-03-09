@@ -1,7 +1,12 @@
 angular.module("listaTelefonica").controller('listaTelefonicaCtrl', function ($scope, $filter, uppercaseFilter, contatosAPI, operadorasAPI, serialGenerator) {
     $scope.app = "Lista Telefonica";
-    $scope.contatos = contatosAPI.getContatos();
-        $scope.operadoras = operadorasAPI.getOperadoras();
+
+    // $scope.contatos = contatosAPI.getContatos();
+    // Força uma mensagem de erro, simulando o .error de callback
+    // quando a chamada a API falhar.
+    $scope.error = "Não foi possível carregar os dados";
+
+    $scope.operadoras = operadorasAPI.getOperadoras();
     $scope.adicionarContato = function (contato) {
         contato.serial = serialGenerator.generate();
         $scope.contatos.push(contatosAPI.saveContato(contato));
