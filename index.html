@@ -20,6 +20,7 @@
 	<script src="js/filters/nameFilter.js"></script>
 	<script src="js/filters/ellipsisFilter.js"></script>
 	<script src="js/directives/uiAlertDirective.js"></script>
+	<script src="js/directives/uiDateDirective.js"></script>
 </head>
 
 <body ng-controller="listaTelefonicaCtrl">
@@ -61,10 +62,11 @@
 		</table>
 		<hr/>
 		<form name="contatoForm">
-			<input class="form-control" type="text" ng-model="contato.nome" name="nome" placeholder="Nome" ng-required="true" ng-minlength="10"
-			/>
+			<input class="form-control" type="text" ng-model="contato.nome" name="nome" placeholder="Nome" ng-required="true" ng-minlength="10"/>
 			<input class="form-control" type="text" ng-model="contato.telefone" name="telefone" placeholder="Telefone" ng-required="true"
 			 ng-pattern="/^\d{4,5}-\d{4}$/" />
+			 {{contato.data}}
+			 <input class="form-control" type="text" ng-model="contato.data" name="data" placeholder="Data" ui-date/>
 			<!-- Exibir o nome da operadora (adiciona o preço, aplicando mascará com currency, para internacionalização com o locale importado), agrupando por categoria, para cada operadora dentro de operadoras. Ordenar por nome -->
 			<select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome + ' ( ' + (operadora.preco | currency) + ' ) ' group by operadora.categoria for operadora in operadoras | orderBy:'nome'">
 				<option value="">Selecione uma operadora</option>
@@ -72,12 +74,12 @@
 		</form>
 
 
-		<div ng-messages="contatoForm.nome.$error" class="alert alert-danger">
-			<div ng-message="required">
+		<div ng-show="contatoForm.nome.$dirty" ng-messages="contatoForm.nome.$error">
+			<div ng-message="required" class="alert alert-danger">
 				Por favor, preencha o nome.
 			</div>
 			<!-- Já digitei alguma coisa pra validar o minlength, então será dirty sempre. Logo, posso tirá-lo. (antes, quando não tinha ng-message e era usado o ng-show)-->
-			<div ng-message="minlength">
+			<div ng-message="minlength" class="alert alert-danger">
 				O campo nome deve ter no mínimo 10 caracteres.
 			</div>
 
