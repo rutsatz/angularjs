@@ -10,9 +10,9 @@ angular.module("listaTelefonica").factory("contatosAPI", function ($filter, uppe
         // Usando o objeto config, definido em configValue.js
         // return $http.get(config.baseUrl + "/contatos");
         return [
-            { nome: $filter('uppercase')("Pedro"), telefone: "99998888", data: new Date(), cor: "blue" },
-            { nome: uppercaseFilter("Ana"), telefone: "99998877", data: new Date(), cor: "yellow" },
-            { nome: "Maria", telefone: "99998866", data: new Date(), cor: "red" }
+            { id: 1, nome: $filter('uppercase')("Pedro"), telefone: "99998888", data: new Date(), cor: "blue" },
+            { id: 2, nome: uppercaseFilter("Ana"), telefone: "99998877", data: new Date(), cor: "yellow" },
+            { id: 3, nome: "Maria", telefone: "99998866", data: new Date(), cor: "red" }
         ];
     };
 
